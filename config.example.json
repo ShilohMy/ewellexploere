@@ -9,7 +9,7 @@
     "patchBlocks":  100,
     "bulkSize":     100,
     "settings": {
-        "symbol": "ETC",
+        "symbol": "ETM",
         "name": "Ethereum Classic",
         "title": "Ethereum Classic Block Explorer",
         "author": "Elaine, Cody, Hackmod, Bakon",
