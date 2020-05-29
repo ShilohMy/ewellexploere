@@ -201,7 +201,7 @@ body.page-md {
 }
 
 .page-header .page-header-menu {
-    border-bottom: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
 }
 
 .page-header .page-header-menu.fixed {

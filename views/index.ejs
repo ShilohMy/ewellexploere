@@ -46,7 +46,7 @@
             <div class="page-wrapper-row">
                 <div class="page-wrapper-top">
                     <!-- BEGIN HEADER -->
-                    <div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header"> </div>
+                    <div data-ng-include="'tpl/header.html'" data-ng-controller="HeaderController" class="page-header"></div>
                     <!-- END HEADER -->
                 </div>
             </div>
@@ -54,8 +54,28 @@
                 <div class="page-wrapper-middle">
                     <!-- BEGIN CONTAINER -->
                     <div class="page-container">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="suanlibg">
+									<div class="chainInfo">
+										<div class="col-sm-3">
+											<div class="valueGroup"><div class="title">区块高度</div><div class="valueGroup_box"><div class="valuePics valuePics_1"></div><div class="value">24151553</div></div></div>
+										</div>
+										<div class="col-sm-3">
+											<div class="valueGroup"><div class="title">存证数</div><div class="valueGroup_box"><div class="valuePics valuePics_2"></div><div class="value">3804137</div></div></div>
+										</div>
+										<div class="col-sm-3">
+											<div class="valueGroup"><div class="title">总交易量</div><div class="valueGroup_box"><div class="valuePics valuePics_3"></div><div class="value">3949254</div></div></div>
+										</div>
+										<div class="col-sm-3">
+											<div class="valueGroup"><div class="title">活跃节点</div><div class="valueGroup_box noneBorder"><div class="valuePics valuePics_4"></div><div class="value">11</div></div></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
                         <!-- BEGIN PAGE HEAD -->
-                        <div ng-show="!isHome" data-ng-include="'tpl/page-head.html'" data-ng-controller="PageHeadController" class="page-head"> </div>
+                        <!-- <div ng-show="!isHome" data-ng-include="'tpl/page-head.html'" data-ng-controller="PageHeadController" class="page-head"> </div> -->
                         <!-- END PAGE HEAD -->
                         <!-- BEGIN PAGE CONTENT -->
                         <div class="page-content">
