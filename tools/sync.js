@@ -1,5 +1,5 @@
 /*
-Name: Ethereum Blockchain syncer
+Name: Ewell Blockchain syncer
 Version: .0.0.2
 This file will start syncing the blockchain from the node address you provide in the conf.json file.
 Please read the README in the root directory that explains the parameters of this code
@@ -24,6 +24,7 @@ const Transaction = mongoose.model('Transaction');
 const Account = mongoose.model('Account');
 const Contract = mongoose.model('Contract');
 const TokenTransfer = mongoose.model('TokenTransfer');
+const Evidence = mongoose.model('Evidence');
 
 const ERC20_METHOD_DIC = { '0xa9059cbb': 'transfer', '0xa978501e': 'transferFrom' };
 
@@ -82,13 +83,13 @@ const normalizeTX = async (txData, receipt, blockData) => {
   if (txData.to) {
     tx.to = txData.to.toLowerCase();
     return tx;
-  } else if (txData.creates) {
+  } if (txData.creates) {
     tx.creates = txData.creates.toLowerCase();
     return tx;
-  } else {
-    tx.creates = receipt.contractAddress.toLowerCase();
-    return tx;
   }
+  tx.creates = receipt.contractAddress.toLowerCase();
+  return tx;
+
 };
 
 /**
@@ -237,6 +238,44 @@ const writeTransactionsToDB = async (config, blockData, flush) => {
               },
             );
           }
+
+          // Internal Evidence
+          const evidence = {
+            'hash': '', 'blockNumber': 0, 'from': 0, 'to': 0, 'filenameHash': 0, 'fileHash': 0, 'contract': '', 'fileUploadTime': 0,
+          };
+          const methodData = txData.input.substr(0, 10);
+          if (ERC20_METHOD_DIC[methodData] === 'evidence' || ERC20_METHOD_DIC[methodData] === 'evidence') {
+            if (ERC20_METHOD_DIC[methodData] === 'evidence') {
+              // Token Evidence transaction
+              evidence.filenameHash = `0x${txData.input.substring(22, 74)}`;
+              evidence.fileHash = `0x${txData.input.substring(34, 74)}`;
+              // transfer.value = Number(`0x${txData.input.substring(74)}`);
+            } else {
+              // transferFrom
+              evidence.filenameHash = `0x${txData.input.substring(34, 74)}`;
+              evidence.fileHash = `0x${txData.input.substring(74, 114)}`;
+              // evidence.value = Number(`0x${txData.input.substring(74)}`);
+            }
+            evidence.method = ERC20_METHOD_DIC[methodData];
+            evidence.hash = txData.hash;
+            evidence.filenameHash = blockData.filenameHash;
+            evidence.fileHash = blockData.fileHash;
+            evidence.contract = txData.to;
+            evidence.fileUploadTime = blockData.timestamp;
+            evidence.blockNumber = blockData.Number;
+            // Write Evidence transaction into db
+            Evidence.update(
+              { hash: evidence.hash },
+              { $setOnInsert: evidence },
+              { upsert: true },
+              (err, data) => {
+                if (err) {
+                  console.log(err);
+                }
+              },
+            );
+          }
+
         }
       }
       self.bulkOps.push(tx);
@@ -597,3 +636,5 @@ if (config.settings.useFiat) {
     getQuote();
   }, quoteInterval);
 }
+
+

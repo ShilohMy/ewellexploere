@@ -88,6 +88,19 @@ const TokenTransfer = new Schema(
   }, { collection: 'TokenTransfer' },
 );
 
+const  Evidence = new Schema(
+  {
+        'hash': { type: String, index: { unique: true}, lowercase: true },
+        'blockNumber': Number,
+        'method': String,
+        'from': { type: String, lowercase: true },
+        'to': { type: String, lowercase: true },
+        'filenameHash': { type: String, index: { unique: true }, lowercase: true },
+        'fileHash': { type: String, index: { unique: true }, lowercase: true },
+        'fileUploadTime': Number,
+  }, { collection: 'Evidence' },
+);
+
 const BlockStat = new Schema(
   {
       'number': { type: Number, index: { unique: true } },
@@ -128,6 +141,12 @@ TokenTransfer.index({ blockNumber: -1 });
 TokenTransfer.index({ from: 1, blockNumber: -1 });
 TokenTransfer.index({ to: 1, blockNumber: -1 });
 TokenTransfer.index({ contract: 1, blockNumber: -1 });
+Evidence.index({ blockNumber: -1 });
+Evidence.index({ from: 1, blockNumber: -1 });
+Evidence.index({ to: 1, blockNumber: -1 });
+Evidence.index({ filenameHash: -1 });
+Evidence.index({ fileHash: -1 });
+Evidence.index({ contract: -1, blockNumber: -1 });
 
 mongoose.model('BlockStat', BlockStat);
 mongoose.model('Block', Block);
@@ -136,6 +155,7 @@ mongoose.model('Contract', Contract);
 mongoose.model('Transaction', Transaction);
 mongoose.model('Market', Market);
 mongoose.model('TokenTransfer', TokenTransfer);
+mongoose.model('Evidence', Evidence);
 module.exports.BlockStat = mongoose.model('BlockStat');
 module.exports.Block = mongoose.model('Block');
 module.exports.Contract = mongoose.model('Contract');
@@ -143,6 +163,7 @@ module.exports.Transaction = mongoose.model('Transaction');
 module.exports.Account = mongoose.model('Account');
 module.exports.Market = mongoose.model('Market');
 module.exports.TokenTransfer = mongoose.model('TokenTransfer');
+module.exports.Evidence = mongoose.model('Evidence');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI || 'mongodb://explorer:quorum@39.100.246.152:27017/explorerDB', {useNewUrlParser: true});
