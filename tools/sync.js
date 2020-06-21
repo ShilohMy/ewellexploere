@@ -27,6 +27,7 @@ const TokenTransfer = mongoose.model('TokenTransfer');
 const Evidence = mongoose.model('Evidence');
 
 const ERC20_METHOD_DIC = { '0xa9059cbb': 'transfer', '0xa978501e': 'transferFrom' };
+const EVIDENCE_METHOD_DIC = { '0xc0d84708': 'saveEvidence' };
 
 /**
   Start config for node connection and sync
@@ -97,6 +98,9 @@ const normalizeTX = async (txData, receipt, blockData) => {
 **/
 var writeBlockToDB = function (config, blockData, flush) {
   const self = writeBlockToDB;
+  if(blockData) {
+    blockData.timestamp = blockData.timestamp.substring(0, 10);
+  }
   if (!self.bulkOps) {
     self.bulkOps = [];
   }
@@ -244,25 +248,32 @@ const writeTransactionsToDB = async (config, blockData, flush) => {
             'hash': '', 'blockNumber': 0, 'from': 0, 'to': 0, 'filenameHash': 0, 'fileHash': 0, 'contract': '', 'fileUploadTime': 0,
           };
           const methodData = txData.input.substr(0, 10);
-          if (ERC20_METHOD_DIC[methodData] === 'evidence' || ERC20_METHOD_DIC[methodData] === 'evidence') {
-            if (ERC20_METHOD_DIC[methodData] === 'evidence') {
+          if (EVIDENCE_METHOD_DIC[methodData] === 'saveEvidence' ) {
+            if (EVIDENCE_METHOD_DIC[methodData] === 'saveEvidence') {
               // Token Evidence transaction
-              evidence.filenameHash = `0x${txData.input.substring(22, 74)}`;
-              evidence.fileHash = `0x${txData.input.substring(34, 74)}`;
+              console.log(`txData: 0x${txData.input}`);
+              evidence.fileHash = `0x${txData.input.substring(266, 272)}`;
+              evidence.filenameHash = `0x${txData.input.substring(394, 400)}`;
               // transfer.value = Number(`0x${txData.input.substring(74)}`);
+              console.log(`getEvidence hash: ${evidence.filenameHash} ${evidence.fileHash}`);
             } else {
               // transferFrom
-              evidence.filenameHash = `0x${txData.input.substring(34, 74)}`;
-              evidence.fileHash = `0x${txData.input.substring(74, 114)}`;
+              evidence.fileHash = `0x${txData.input.substring(266, 272)}`;
+              evidence.filenameHash = `0x${txData.input.substring(394, 400)}`;
               // evidence.value = Number(`0x${txData.input.substring(74)}`);
+              console.log(`getEvidence hash: ${evidence.filenameHash} ${evidence.fileHash}`);
             }
-            evidence.method = ERC20_METHOD_DIC[methodData];
+            evidence.method = EVIDENCE_METHOD_DIC[methodData];
             evidence.hash = txData.hash;
-            evidence.filenameHash = blockData.filenameHash;
-            evidence.fileHash = blockData.fileHash;
+            console.log(`hash: ${evidence.hash}`)
+            // evidence.filenameHash = blockData.filenameHash;
+            // evidence.fileHash = blockData.fileHash;
             evidence.contract = txData.to;
             evidence.fileUploadTime = blockData.timestamp;
             evidence.blockNumber = blockData.Number;
+            evidence.from = txData.from;
+            evidence.to = txData.to;
+            
             // Write Evidence transaction into db
             Evidence.update(
               { hash: evidence.hash },

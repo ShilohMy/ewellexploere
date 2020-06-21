@@ -88,7 +88,6 @@ const TokenTransfer = new Schema(
   }, { collection: 'TokenTransfer' },
 );
 
-
 const  Evidence = new Schema(
   {
         'hash': { type: String, index: { unique: true}, lowercase: true },
