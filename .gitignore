@@ -41,3 +41,7 @@ data/
 config.json
 .node-xmlhttprequest-*
 /nbproject/private/
+node_modules
+node_modules
+node_modules
+node_modules

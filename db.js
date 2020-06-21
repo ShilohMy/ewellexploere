@@ -91,6 +91,7 @@ const TokenTransfer = new Schema(
 const  Evidence = new Schema(
   {
         'hash': { type: String, index: { unique: true}, lowercase: true },
+        'contract': { type: String, lowercase: true },
         'blockNumber': Number,
         'method': String,
         'from': { type: String, lowercase: true },
@@ -146,7 +147,9 @@ Evidence.index({ from: 1, blockNumber: -1 });
 Evidence.index({ to: 1, blockNumber: -1 });
 Evidence.index({ filenameHash: -1 });
 Evidence.index({ fileHash: -1 });
+Evidence.index({ fileUploadTime: -1 });
 Evidence.index({ contract: -1, blockNumber: -1 });
+
 
 mongoose.model('BlockStat', BlockStat);
 mongoose.model('Block', Block);
