@@ -270,7 +270,7 @@ const writeTransactionsToDB = async (config, blockData, flush) => {
             // evidence.fileHash = blockData.fileHash;
             evidence.contract = txData.to;
             evidence.fileUploadTime = blockData.timestamp;
-            evidence.blockNumber = blockData.Number;
+            evidence.blockNumber = blockData.number;
             evidence.from = txData.from;
             evidence.to = txData.to;
             
