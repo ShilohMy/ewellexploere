@@ -273,7 +273,7 @@ const writeTransactionsToDB = async (config, blockData, flush) => {
             evidence.blockNumber = blockData.number;
             evidence.from = txData.from;
             evidence.to = txData.to;
-            
+
             // Write Evidence transaction into db
             Evidence.update(
               { hash: evidence.hash },
