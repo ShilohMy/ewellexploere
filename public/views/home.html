@@ -12,15 +12,16 @@
 		</div>
 		<table class="table table-striped">
 			<tr style="height: 60px; line-height: 60px;">
-				<th><span style="line-height: 60px;">所在区块高度</span></th>
+				<th><span style="line-height: 60px;">所在区块高度{{t.timestamp}}</span></th>
 				<th><span style="line-height: 60px;">存证项目</span></th>
 				<th><span style="line-height: 60px;">存证内容</span></th>
 				<th><span style="line-height: 60px;">时间</span></th>
 			</tr>
-			<tr style="height: 60px;line-height: 60px;">
+			
+			<tr style="height: 60px;line-height: 60px;" ng-repeat="t in latest_blocks track by $index">
 				<td>
 					<div style="height: 60px;line-height: 60px;">
-						24150745
+						{{ t.number }}
 					</div>
 				</td>
 				<td>
@@ -30,122 +31,14 @@
 				</td>
 				<td>
 					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
+						<span class="glyphicon glyphicon-align-left" aria-hidden="true">
+							<a href="/block/{{t.number}}">数据摘要</a>
+						</span>
 					</div>
 				</td>
 				<td>
 					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
-					</div>
-				</td>
-			</tr>
-			<tr style="height: 60px;line-height: 60px;">
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						24150745
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						医疗数据存证
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
-					</div>
-				</td>
-			</tr>
-			<tr style="height: 60px;line-height: 60px;">
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						24150745
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						医疗数据存证
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
-					</div>
-				</td>
-			</tr>
-			<tr style="height: 60px;line-height: 60px;">
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						24150745
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						医疗数据存证
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
-					</div>
-				</td>
-			</tr>
-			<tr style="height: 60px;line-height: 60px;">
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						24150745
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						医疗数据存证
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
-					</div>
-				</td>
-			</tr>
-			<tr style="height: 60px;line-height: 60px;">
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						24150745
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						医疗数据存证
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						<span class="glyphicon glyphicon-align-left" aria-hidden="true">数据摘要</span>
-					</div>
-				</td>
-				<td>
-					<div style="height: 60px;line-height: 60px;">
-						2020-05-28 20:21:12
+						{{ t.timestamp | timeDuration }}
 					</div>
 				</td>
 			</tr>
