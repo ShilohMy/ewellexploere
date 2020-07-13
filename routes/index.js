@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Block = mongoose.model('Block');
 const Transaction = mongoose.model('Transaction');
 const Account = mongoose.model('Account');
+const Evidence = mongoose.model('Evidence');
 const async = require('async');
 const filters = require('./filters');
 

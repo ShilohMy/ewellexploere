@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12 portlet light">
-		<div class="class=" col-md-12">
+		<div class="col-md-12">
 			<div class="ant-card detailContent ant-card-bordered">
 				<div class="ant-card-body">
 					<div class="poeTitle"><span class="dataTitle">存证详情</span>
@@ -13,15 +13,15 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-3  fieldLabel">存证文件名哈希：</div>
-								<div class="col-sm-9">18560507a8aaafa3a3ab9df4f0f945e2aadf013a0628a7d10e6e4ee4adaaa0a5</div>
+								<div class="col-sm-9">{{evidence.filenameHash}}</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3 fieldLabel">上链时间：</div>
-								<div class="col-sm-9">2020-05-28 20:58:13</div>
+								<div class="col-sm-9">{{evidence.fileUploadTime | date:'yyyy-MM-dd HH:mm:ss Z' }}</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3 fieldLabel">存证内容哈希：</div>
-								<div class="col-sm-9" style="word-break: break-all;">c0b28a68447f6334c513dfc0ef3c7d6aa19b260929ee14590e1af2747684261a</div>
+								<div class="col-sm-9" style="word-break: break-all;">{{evidence.fileHash}}</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3 fieldLabel">扩展存证信息：</div>
@@ -29,11 +29,11 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-3 fieldLabel">所在区块高度：</div>
-								<div class="col-sm-9">24151744</div>
+								<div class="col-sm-9">{{evidence.fileUploadTime}}</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3 fieldLabel">所在区块哈希：</div>
-								<div class="col-sm-9">4f3669d0f759a066d4817f1d3b2fa5f5628675983706d427b53be5fe0c1f2eb3</div>
+								<div class="col-sm-9">{{evidence.hash}}</div>
 							</div>
 						</div>
 					</div>
